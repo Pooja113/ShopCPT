@@ -1,0 +1,2 @@
+# ShopCPT
+ ShopCPT Plugin
