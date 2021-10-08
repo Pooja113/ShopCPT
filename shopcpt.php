@@ -20,50 +20,64 @@
 
 defined('ABSPATH') or die('You can not Access this file!!');
 
+if( !class_exists('ShopCPT')){
+    class ShopCPT {
+        public $pluginName;
 
-class ShopCPT {
+        function __construct() {
+            add_action('init', array ( $this,'custom_post_type') );  
+            
+            $this->pluginName = plugin_basename(__FILE__);
+        }
+
+        function register(){
+            add_action('admin_enqueue_scripts', array ( $this,'enqueue') );
+
+            add_action('admin_menu', array($this,'add_admin_pages'));
+
+            add_filter("plugin_action_links_$this->pluginName", array($this,'settings_link'));
 
 
-    function __construct() {
-        add_action('init', array ( $this,'custom_post_type') );
+        }
+        public function settings_link($links){
+            $settings_link = '<a href="admin.php?page=shop_cpt" >Settings</a>';
+            array_push($links, $settings_link);
+            return $links;
+        }
+
+        public function add_admin_pages(){
+            add_menu_page('Shop Admin','Shop Admin','manage_options','shop_cpt',array($this,'admin_index'),'dashicons-edit-page',110); 
+        }
+
+        public function admin_index(){
+            require_once plugin_dir_path(__FILE__).'templates/admin.php';
+        }
+
+        function  custom_post_type() {
+            register_post_type('shopcpt',array ('public' => true, 'label'=>'ShopCPT' ) );
+        }
+
+        function enqueue(){
+            wp_enqueue_style('mystyle',plugins_url('/assets/style.css',__FILE__));
+            wp_enqueue_style('myscript',plugins_url('/assets/myscript.js',__FILE__));
+        }
+
+        function activate(){
+            require_once plugin_dir_path(__FILE__).'inc/shopcpt-activate.php';
+            ShopCPTActivate::activate();
+        }
     }
-    function register(){
-        add_action('admin_enqueue_scripts', array ( $this,'enqueue') );
-    }
-
-    function activate() {
-        //generate CPT
-        $this->custom_post_type();
-
-        flush_rewrite_rules();
-    }
-
-    function deactivate() {
-       flush_rewrite_rules();
-    }
-
-    function  custom_post_type() {
-        register_post_type('shopcpt',array ('public' => true, 'label'=>'ShopCPT' ) );
-    }
-
-    function enqueue(){
-        wp_enqueue_style('mystyle',plugins_url('/assets/style.css',__FILE__));
-        wp_enqueue_style('myscript',plugins_url('/assets/myscript.js',__FILE__));
-    }
-
-    }
-
-if( class_exists('ShopCPT')){
     $shopcpt = new ShopCPT();
     $shopcpt->register(); 
+
+    //activate
+    register_activation_hook( __FILE__, array( $shopcpt,'activate' ) );
+
+    //deactivate
+    require_once plugin_dir_path(__FILE__).'inc/shopcpt-deactivate.php';
+    register_deactivation_hook( __FILE__, array( 'ShopCPTDeactivate','deactivate' ) );
+
+
 }
-
-//activate
-register_activation_hook( __FILE__, array( $shopcpt,'activate' ) );
-
-//deactivate
-register_deactivation_hook( __FILE__, array( $shopcpt,'deactivate' ) );
-
-
 
 
