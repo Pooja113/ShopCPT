@@ -21,3 +21,49 @@
 defined('ABSPATH') or die('You can not Access this file!!');
 
 
+class ShopCPT {
+
+
+    function __construct() {
+        add_action('init', array ( $this,'custom_post_type') );
+    }
+    function register(){
+        add_action('admin_enqueue_scripts', array ( $this,'enqueue') );
+    }
+
+    function activate() {
+        //generate CPT
+        $this->custom_post_type();
+
+        flush_rewrite_rules();
+    }
+
+    function deactivate() {
+       flush_rewrite_rules();
+    }
+
+    function  custom_post_type() {
+        register_post_type('shopcpt',array ('public' => true, 'label'=>'ShopCPT' ) );
+    }
+
+    function enqueue(){
+        wp_enqueue_style('mystyle',plugins_url('/assets/style.css',__FILE__));
+        wp_enqueue_style('myscript',plugins_url('/assets/myscript.js',__FILE__));
+    }
+
+    }
+
+if( class_exists('ShopCPT')){
+    $shopcpt = new ShopCPT();
+    $shopcpt->register(); 
+}
+
+//activate
+register_activation_hook( __FILE__, array( $shopcpt,'activate' ) );
+
+//deactivate
+register_deactivation_hook( __FILE__, array( $shopcpt,'deactivate' ) );
+
+
+
+
