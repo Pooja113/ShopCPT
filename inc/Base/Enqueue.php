@@ -4,13 +4,15 @@
  */
 namespace Inc\Base;
 
- class Enqueue{
+use \Inc\Base\BaseController;
+
+ class Enqueue extends BaseController{
     public function register(){
         add_action('admin_enqueue_scripts', array ( $this,'enqueue') );
     }
 
     public function enqueue(){
-        wp_enqueue_style('mystyle', PLUGIN_URL . '/assets/style.css');
-        wp_enqueue_style('myscript',PLUGIN_URL . '/assets/myscript.js');
+        wp_enqueue_style('mystyle', $this->plugin_url . '/assets/style.css');
+        wp_enqueue_style('myscript',$this->plugin_url . '/assets/myscript.js');
     }
 }

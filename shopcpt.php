@@ -24,22 +24,16 @@ if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
     require_once dirname(__FILE__).'/vendor/autoload.php'; 
 }
 
-use Inc\Base\Activate;
-use Inc\Base\Deactivate;
-
-define('PLUGIN_PATH', plugin_dir_path(__FILE__).'templates/admin.php');
-define('PLUGIN_URL', plugin_dir_url(__FILE__));
-define('PLUGIN', plugin_basename(__FILE__));
-
 
 function activate_shop_cpt(){
-    Activate::activate(); 
+    Inc\Base\Activate::activate(); 
 }
-function deactivate_shop_cpt(){
-    deactivate::deactivate(); 
-}
-
 register_activation_hook( __FILE__ ,'activate_shop_cpt');
+
+
+function deactivate_shop_cpt(){
+    Inc\Base\deactivate::deactivate(); 
+}
 register_deactivation_hook( __FILE__ ,'deactivate_shop_cpt');
 
 
