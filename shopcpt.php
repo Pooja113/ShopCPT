@@ -20,6 +20,14 @@
 
 defined('ABSPATH') or die('You can not Access this file!!');
 
+if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
+    require_once dirname(__FILE__).'/vendor/autoload.php'; 
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
 if( !class_exists('ShopCPT')){
     class ShopCPT {
         public $pluginName;
@@ -63,8 +71,8 @@ if( !class_exists('ShopCPT')){
         }
 
         function activate(){
-            require_once plugin_dir_path(__FILE__).'inc/shopcpt-activate.php';
-            ShopCPTActivate::activate();
+            //require_once plugin_dir_path(__FILE__).'inc/shopcpt-activate.php';
+            Activate::activate();
         }
     }
     $shopcpt = new ShopCPT();
@@ -74,8 +82,8 @@ if( !class_exists('ShopCPT')){
     register_activation_hook( __FILE__, array( $shopcpt,'activate' ) );
 
     //deactivate
-    require_once plugin_dir_path(__FILE__).'inc/shopcpt-deactivate.php';
-    register_deactivation_hook( __FILE__, array( 'ShopCPTDeactivate','deactivate' ) );
+    //require_once plugin_dir_path(__FILE__).'inc/shopcpt-deactivate.php';
+    register_deactivation_hook( __FILE__, array( 'Deactivate','deactivate' ) );
 
 
 }
