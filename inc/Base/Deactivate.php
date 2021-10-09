@@ -3,11 +3,10 @@
  *  @package ShopCPT
  */
 
-namespace Inc;
+namespace Inc\Base;
 
  class Deactivate{
     function deactivate() {
-        //generate CPT
         flush_rewrite_rules();
     }
  }

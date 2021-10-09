@@ -24,68 +24,27 @@ if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
     require_once dirname(__FILE__).'/vendor/autoload.php'; 
 }
 
-use Inc\Activate;
-use Inc\Deactivate;
-use Inc\Admin\AdminPages;
+use Inc\Base\Activate;
+use Inc\Base\Deactivate;
 
-if( !class_exists('ShopCPT')){
-    class ShopCPT {
-        public $pluginName;
-
-        function __construct() {
-            add_action('init', array ( $this,'custom_post_type') );  
-            
-            $this->pluginName = plugin_basename(__FILE__);
-        }
-
-        function register(){
-            add_action('admin_enqueue_scripts', array ( $this,'enqueue') );
-
-            add_action('admin_menu', array($this,'add_admin_pages'));
-
-            add_filter("plugin_action_links_$this->pluginName", array($this,'settings_link'));
+define('PLUGIN_PATH', plugin_dir_path(__FILE__).'templates/admin.php');
+define('PLUGIN_URL', plugin_dir_url(__FILE__));
+define('PLUGIN', plugin_basename(__FILE__));
 
 
-        }
-        public function settings_link($links){
-            $settings_link = '<a href="admin.php?page=shop_cpt" >Settings</a>';
-            array_push($links, $settings_link);
-            return $links;
-        }
+function activate_shop_cpt(){
+    Activate::activate(); 
+}
+function deactivate_shop_cpt(){
+    deactivate::deactivate(); 
+}
 
-        public function add_admin_pages(){
-            add_menu_page('Shop Admin','Shop Admin','manage_options','shop_cpt',array($this,'admin_index'),'dashicons-edit-page',110); 
-        }
-
-        public function admin_index(){
-            require_once plugin_dir_path(__FILE__).'templates/admin.php';
-        }
-
-        function  custom_post_type() {
-            register_post_type('shopcpt',array ('public' => true, 'label'=>'ShopCPT' ) );
-        }
-
-        function enqueue(){
-            wp_enqueue_style('mystyle',plugins_url('/assets/style.css',__FILE__));
-            wp_enqueue_style('myscript',plugins_url('/assets/myscript.js',__FILE__));
-        }
-
-        function activate(){
-            //require_once plugin_dir_path(__FILE__).'inc/shopcpt-activate.php';
-            Activate::activate();
-        }
-    }
-    $shopcpt = new ShopCPT();
-    $shopcpt->register(); 
-
-    //activate
-    register_activation_hook( __FILE__, array( $shopcpt,'activate' ) );
-
-    //deactivate
-    //require_once plugin_dir_path(__FILE__).'inc/shopcpt-deactivate.php';
-    register_deactivation_hook( __FILE__, array( 'Deactivate','deactivate' ) );
+register_activation_hook( __FILE__ ,'activate_shop_cpt');
+register_deactivation_hook( __FILE__ ,'deactivate_shop_cpt');
 
 
+if(class_exists('Inc\\Init')) {
+    Inc\Init::register_services();
 }
 
 

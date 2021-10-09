@@ -2,11 +2,10 @@
 /**
  *  @package ShopCPT
  */
-namespace Inc;
+namespace Inc\Base;
 
  class Activate{
     function activate() {
-        //generate CPT
         flush_rewrite_rules();
     }
  }
