@@ -6,22 +6,22 @@ ShopCPT Plugin
 
 - Modular Administration Area
 
-# CPT Manager
+* CPT Manager
 
-# Custom Taxonomy Manager
+* Custom Taxonomy Manager
 
-# Widget
+* Widget
 
-# Post and Page galler integration
+* Post and Page galler integration
 
 comment in the front-end,admin can aaprove comments,Select whihc comments to display
 
-# Testimonial Section
+- Testimonial Section
 
-# Custom Template Section
+- Custom Template Section
 
-# Ajax bases Login/Register system
+- Ajax bases Login/Register system
 
-# Membership protected Area
+- Membership protected Area
 
-# Chat System
+- Chat System
