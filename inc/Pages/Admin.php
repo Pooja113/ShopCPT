@@ -31,7 +31,7 @@ use \Inc\API\SettingsApi;
     public function register(){
      
       //add_action('admin_menu', array($this,'add_admin_pages')); 
-      $this->settings->addPages($this->pages) ->register();
+      $this->settings->addPages($this->pages)->withSubPage('Dashboard')->register();
     }
 
   //   public function add_admin_pages(){
