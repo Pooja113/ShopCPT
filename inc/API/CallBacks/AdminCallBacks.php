@@ -36,7 +36,7 @@ class AdminCallBacks extends BaseController
     }
 
     public function cptAdminFields(){
-        $value = esc_attr( get_option( 'text-example'));
+        $value = esc_attr( get_option( 'text_example'));
         echo '<input type="text" class="regular-text" name="text-example" value="'. $value .'" placeholder="Write here">';
     }
     
