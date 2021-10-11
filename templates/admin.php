@@ -3,10 +3,10 @@
     <?php settings_errors(); ?>
 
 
-<form action ="options.php">
+<form method ="post" action ="options.php">
     <?php 
         settings_fields( 'shop_cpt_group' );
-       // do_settings_sections( 'shop_cpt' );
+        do_settings_sections( 'shop_cpt' );
         submit_button();
     ?>
 </form>
