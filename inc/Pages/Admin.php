@@ -54,7 +54,7 @@ use \Inc\API\CallBacks\AdminCallBacks;
            'menu_title' => 'Manager',
            'capability' => 'manage_options',
            'menu_slug'=> 'cpt_manager',
-           'callback'=> function(){echo '<h1>CPT Manager !!</h1>';},
+           'callback'=> array( $this->callbacks, 'cptManager'),
         ),
         array(
           'parent_slug' => 'shop_cpt',
@@ -62,7 +62,7 @@ use \Inc\API\CallBacks\AdminCallBacks;
            'menu_title' => 'Taxonomies',
            'capability' => 'manage_options',
            'menu_slug'=> 'cpt_taxonomoies',
-           'callback'=> function(){echo '<h1>CPT Toxonomy !!</h1>';},
+           'callback'=> array( $this->callbacks, 'cptTaxonomies'),
         ),
         array(
           'parent_slug' => 'shop_cpt',
@@ -70,7 +70,7 @@ use \Inc\API\CallBacks\AdminCallBacks;
            'menu_title' => 'Widgets',
            'capability' => 'manage_options',
            'menu_slug'=> 'cpt_widgets',
-           'callback'=> function(){echo '<h1>CPT Widgets !!</h1>';},
+           'callback'=> array( $this->callbacks, 'cptWidgets'),
         )
         ); 
     }
