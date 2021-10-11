@@ -8,6 +8,7 @@ namespace Inc\API;
 class SettingsApi {
     
     public $admin_pages = array();
+
     public $admin_subpages = array();
 
 
@@ -34,28 +35,34 @@ class SettingsApi {
         $admin_page  = $this->admin_pages[0];
         $subpage = array(
             array(
-                'parent_slug' => $admin_pages['menu_slug'],
-                'page_title' =>$admin_pages['page_title'],  
-                'menu_title' => $admin_pages['menu_title'],
-                'capability' => $admin_pages['capability'],
-                'menu_slug'=> $admin_pages['menu_slug'],
-                'callback'=> $admin_pages['callback'],
+                'parent_slug' =>$admin_page['menu_slug'],    
+                'page_title' =>$admin_page['page_title'],  
+                'menu_title' => $admin_page['menu_title'],
+                'capability' => $admin_page['capability'],
+                'menu_slug'=> $admin_page['menu_slug'],
+                'callback'=> $admin_page['callback'],
              )
             );
-            $this->admin_subpage = $subpage;
+            $this->admin_subpages = $subpage;
             return $this;
     }
 
+    public function addSubPages(array $pages){
+        $this->admin_subpages = array_merge( $this->admin_subpages , $pages);
+        return $this;
+    }
+
+
      public function addAdminMenu(){
 
-         foreach ( $this->admin_pages as $page){
+         foreach ( $this->admin_pages as $page){    
              
             add_menu_page( $page['page_title'], $page['menu_title'], $page['capability'], $page['menu_slug'], $page['callback'], $page['icon_url'], $page['position'] );
          }
 
          foreach ( $this->admin_subpages as $page){
              
-            add_submenu_page( $page['parent_title'],$page['page_title'], $page['menu_title'], $page['capability'], $page['menu_slug'], $page['callback'] );
+            add_submenu_page( $page['parent_slug'],$page['page_title'], $page['menu_title'], $page['capability'], $page['menu_slug'], $page['callback'] );
          }
      }
 }
