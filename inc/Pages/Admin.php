@@ -29,6 +29,10 @@ use \Inc\API\CallBacks\AdminCallBacks;
 
       $this->setSubPages();
 
+      $this->setSettings();
+      $this->setSections();
+      $this->setFields();
+
       $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
     }
 
@@ -73,5 +77,45 @@ use \Inc\API\CallBacks\AdminCallBacks;
            'callback'=> array( $this->callbacks, 'cptWidgets'),
         )
         ); 
+    }
+
+    public function setSettings(){
+      $args = array(
+        array(
+         'option_group'  => 'shop_cpt_group',
+         'option_name'  => 'text_example',
+         'callback'  => array($this-> callbacks, 'cptOptionGroup') ,
+        )
+      );
+      $this->settings->setSettings( $args );
+    }
+
+    public function setSections(){
+      $args = array(
+        array(
+         'id'  => 'cpt_admin_index',
+         'title'  => 'Settings',
+         'callback'  => array($this-> callbacks, 'cptAdminSection') ,
+         'page'  => 'shop_cpt',
+        )
+      );
+      $this->settings->setSections( $args );
+    }
+
+    public function setFields(){
+      $args = array(
+        array(
+         'id'  => 'text_example',
+         'title'  => 'Text',
+         'callback'  => array($this-> callbacks, 'cptAdminFields') ,
+         'page'  => 'shop_cpt',
+         'section'  => 'cpt_admin_index',
+         'args' => array(
+           'label_for' => 'text_example',
+           'class' => 'example-class' 
+         )
+        )
+      );
+      $this->settings->setFields( $args );
     }
  }

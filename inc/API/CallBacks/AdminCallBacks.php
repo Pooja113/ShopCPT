@@ -26,4 +26,19 @@ class AdminCallBacks extends BaseController
     public function cptWidgets(){
         return require_once("$this->plugin_path/templates/widget.php");
     }
+
+    public function cptOptionGroup( $input){
+        return $input;
+    }
+
+    public function cptAdminSection(){
+        echo "check this section";
+    }
+
+    public function cptAdminFields(){
+        $value = esc_attr( get_option( 'text-example'));
+        echo '<input type="text" class="regular-text" name="text-example" value="'. $value .'" placeholder="Write here">';
+    }
+    
+
 }

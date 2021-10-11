@@ -1,1 +1,13 @@
-<h1>SHOP ADMIN</h1>   
+<div class="wrap">
+    <h1>Shop Admin !!!</h1>
+    <?php settings_errors(); ?>
+
+
+<form action ="options.php">
+    <?php 
+        settings_fields( 'shop_cpt_group' );
+       // do_settings_sections( 'shop_cpt' );
+        submit_button();
+    ?>
+</form>
+</div>
