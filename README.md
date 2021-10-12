@@ -4,7 +4,8 @@ ShopCPT Plugin
 
 ##Sections and Features of the plugin
 
-- Modular Administration Area
+- Modular Administration Area : DONE
+
 * CPT Manager
 * Custom Taxonomy Manager
 * Widget
