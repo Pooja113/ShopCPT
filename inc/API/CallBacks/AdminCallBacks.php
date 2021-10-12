@@ -27,7 +27,7 @@ class AdminCallBacks extends BaseController
         return require_once("$this->plugin_path/templates/widget.php");
     }
 
-    public function cptOptionGroup( $input){
+    public function cptOptionGroup( $input ){
         return $input;
     }
 
