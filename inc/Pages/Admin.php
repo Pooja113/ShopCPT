@@ -85,7 +85,11 @@ use \Inc\API\CallBacks\AdminCallBacks;
          'option_group'  => 'shop_cpt_group',
          'option_name'  => 'text_example',
          'callback'  => array($this->callbacks, 'cptOptionGroup') ,
-        )
+        ),
+        array(
+          'option_group'  => 'shop_cpt_group',
+          'option_name'  => 'first_name'
+         )
       );
       $this->settings->setSettings( $args );
     }
@@ -114,7 +118,18 @@ use \Inc\API\CallBacks\AdminCallBacks;
            'label_for' => 'text_example',
            'class' => 'example-class' 
          )
-        )
+         ),
+         array(
+          'id'  => 'first_name',
+          'title'  => 'First Name',
+          'callback'  => array($this->callbacks, 'cptFirstName') ,
+          'page'  => 'shop_cpt',
+          'section'  => 'cpt_admin_index',
+          'args' => array(
+            'label_for' => 'first_name',
+            'class' => 'example-class' 
+          )
+          )
       );
       $this->settings->setFields( $args );
     }
