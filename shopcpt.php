@@ -20,25 +20,27 @@
 
 defined('ABSPATH') or die('You can not Access this file!!');
 
-if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
+if (file_exists(dirname(__FILE__).'/vendor/autoload.php')) {
     require_once dirname(__FILE__).'/vendor/autoload.php'; 
 }
 
 
-function activate_shop_cpt(){
+function activate_shop_cpt() 
+{
     Inc\Base\Activate::activate(); 
 }
-register_activation_hook( __FILE__ ,'activate_shop_cpt');
+register_activation_hook(__FILE__ ,'activate_shop_cpt');
 
 
-function deactivate_shop_cpt(){
+function deactivate_shop_cpt()
+{
     Inc\Base\deactivate::deactivate(); 
 }
-register_deactivation_hook( __FILE__ ,'deactivate_shop_cpt');
+register_deactivation_hook(__FILE__ ,'deactivate_shop_cpt');
 
 
-if(class_exists('Inc\\Init')) {
-    Inc\Init::register_services();
+if (class_exists('Inc\\Init')) {
+     Inc\Init::register_services();
 }
 
 
