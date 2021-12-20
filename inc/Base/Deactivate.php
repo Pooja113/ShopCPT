@@ -6,7 +6,7 @@
 namespace Inc\Base;
 
  class Deactivate{
-    function deactivate() {
+    public static function deactivate() {
         flush_rewrite_rules();
     }
  }

@@ -12,6 +12,7 @@ use \Inc\Base\BaseController;
     }
 
     public function enqueue(){
+        //enqueue all the scripts
         wp_enqueue_style('mystyle', $this->plugin_url . '/assets/style.css');
         wp_enqueue_style('myscript',$this->plugin_url . '/assets/myscript.js');
     }
