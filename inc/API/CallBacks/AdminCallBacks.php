@@ -31,8 +31,8 @@ class AdminCallBacks extends BaseController
         return $input;
     }
 
-    public function cptAdminSection(){
-        echo "check this section";
+    public function cptAdminSections(){
+        echo "Check this section";
     }
 
     public function cptAdminFields(){
