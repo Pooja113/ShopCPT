@@ -3,7 +3,7 @@
  *  @package ShopCPT
  */
 
-namespace Inc\API;
+namespace Inc\Api;
 
 class SettingsApi {
     
