@@ -1,6 +1,7 @@
 # ShopCPT
 
 ShopCPT Plugin
+Learnt using composer
 
 ##Sections and Features of the plugin
 
